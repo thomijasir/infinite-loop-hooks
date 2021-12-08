@@ -2,18 +2,13 @@ import React, { useState, useEffect } from "react";
 
 import { DEFAULT_LIST_DATA } from "./constant";
 import ApiService from "./Api";
+import InfiniteScroll from "./components/InfiniteScroll";
 import { postMapperData } from "./Mapper";
 import "./App.scss";
 
 const { postService } = ApiService.getInstance();
 
 // i know if there bunch of data the interface must be separate file but just because its a test i need hurry
-interface InfiniteLoopItem {
-  id: number;
-  title: string;
-  desc: string;
-}
-
 interface DataPlaceholder {
   userId: number;
   id: number;
@@ -43,7 +38,6 @@ const App = (iProps: IProps) => {
     limit: 10,
   });
 
-  // didMount
   useEffect(() => {
     setIsLoadingApi(true);
     postService
@@ -108,30 +102,12 @@ const App = (iProps: IProps) => {
             <div className="section-title">
               <p>React Application Hooks</p>
             </div>
-            {/* I not split into component because need hurry but i know as advance how the components works it just for challenge in the real world app it will better */}
-            <div className="infinite-loop" onScroll={handleScroll}>
-              {infiniteItem.map((data: InfiniteLoopItem, index: number) => (
-                <div className="item" key={`${data.id}-${index}`}>
-                  <div className="title">
-                    <p>{data.title}</p>
-                  </div>
-                  <div className="description">
-                    <p>{data.desc}</p>
-                  </div>
-                </div>
-              ))}
-              {/* i know the loader component must be split into small pieces but i need hurry so i put everything on the home */}
-              <div className="loader-wrapper">
-                <div
-                  className={`lds-ripple ${
-                    isLoadingItem ? "active" : "active"
-                  }`}
-                >
-                  <div></div>
-                  <div></div>
-                </div>
-              </div>
-            </div>
+            {/* Just for sample Component Base & Passing Props in hooks*/}
+            <InfiniteScroll
+              handleScroll={handleScroll}
+              infiniteItem={infiniteItem}
+              isLoadingItem={isLoadingItem}
+            />
           </div>
         </div>
       </div>

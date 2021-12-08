@@ -8,8 +8,6 @@ class ApiService {
     return ApiService.INSTANCE;
   };
 
-  movieService: any;
-  peopleService: any;
   postService: any;
 
   constructor() {
