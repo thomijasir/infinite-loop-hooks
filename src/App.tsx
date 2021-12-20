@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FC } from "react";
 
 import { DEFAULT_LIST_DATA } from "./constant";
 import ApiService from "./Api";
@@ -28,10 +28,10 @@ interface ResJsonPlaceholder {
 // just for template if later need props just add here
 interface IProps {}
 
-const App = (iProps: IProps) => {
+const App: FC = (iProps: IProps) => {
   // State
   const [isLoadingApi, setIsLoadingApi] = useState(false);
-  const [isLoadingItem, setIsLoadingItem] = useState(false);
+  const [isLoadingItem, setIsLoadingItem] = useState<boolean>(false);
   const [infiniteItem, setInfiniteItem] = useState(DEFAULT_LIST_DATA);
   const [pages, setPages] = useState({
     perPage: 0,
